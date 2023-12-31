@@ -29,8 +29,8 @@ public class MultiArraySum {
             arrIndex++;
             rowSum = 0;
         }
-        for (int j = 0; j < matrix[j].length; j++) {
-            for (int i = j; i < matrix.length; i++) {
+        for (int j = 0; j < matrix[0].length; j++) {
+            for (int i = 0; i < matrix.length; i++) {
                 columnSum += matrix[i][j];
             }
             res[arrIndex + j] = columnSum;
@@ -39,9 +39,25 @@ public class MultiArraySum {
         return res;
     }
 
+    public static int[] biggestInt(int[][] matrix) {
+        int max = Integer.MIN_VALUE;
+        int[] res = new int[3];
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 1; j < matrix[0].length; j++) {
+                if(matrix[i][j - 1] > matrix[i][j]) {
+                    res[0] = matrix[i][j - 1];
+                    res[1] = i;
+                    res[2] = j;
+                }
+            }
+        }
+        return res;
+    }
+
     public static void main(String[] args) {
-        int matrix[][] = {{1, 2, 3}, {1, 2, 3}};
+        int matrix[][] = {{1, 2, 3}, {1, 2, 3}, {3, 7, 1}};
         System.out.println(sumArray(matrix));
         System.out.println(Arrays.toString(rowColSum(matrix)));
+        System.out.println(Arrays.toString(biggestInt(matrix)));
     }
 }
